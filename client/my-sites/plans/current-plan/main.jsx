@@ -20,7 +20,8 @@ import BusinessPlanDetails from 'my-sites/upgrades/checkout-thank-you/business-p
 import PurchaseDetail from 'components/purchase-detail';
 import {
 	getPlansBySite,
-	getCurrentPlan
+	getCurrentPlan,
+	isCurrentPlanExpiring
 } from 'state/sites/plans/selectors';
 import { getSelectedSite, getSelectedSiteId } from 'state/ui/selectors';
 import { fetchSitePlans } from 'state/sites/plans/actions';
@@ -61,7 +62,7 @@ const PlanDetailsComponent = React.createClass( {
 
 		const hasAutoRenew = plan.auto_renew;
 		const classes = classNames( 'current-plan__purchase-info', {
-			'is-expiring': plan.userFacingExpiryMoment < this.moment().add( 30, 'days' )
+			'is-expiring': this.props.isExpiring
 		} );
 
 		return (
@@ -223,7 +224,8 @@ export default connect(
 			selectedSite: getSelectedSite( state ),
 			sitePlans: getPlansBySite( state, getSelectedSite( state ) ),
 			context: ownProps.context,
-			currentPlan: getCurrentPlan( state, getSelectedSiteId( state ) )
+			currentPlan: getCurrentPlan( state, getSelectedSiteId( state ) ),
+			isExpiring: isCurrentPlanExpiring( state, getSelectedSiteId( state ) )
 		};
 	},
 
