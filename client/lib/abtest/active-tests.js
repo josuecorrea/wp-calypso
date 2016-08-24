@@ -41,6 +41,14 @@ module.exports = {
 		},
 		defaultVariation: 'singlePurchaseFlow'
 	},
+	signupCheckoutRedirect: {
+		datestamp: '20160901',
+		variations: {
+			auto: 50,
+			manual: 50,
+		},
+		defaultVariation: 'manual',
+	},
 	signupStore: {
 		datestamp: '20160727',
 		variations: {
